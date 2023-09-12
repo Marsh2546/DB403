@@ -13,7 +13,7 @@
         $sum = 'ผมรวมคือ';
         return '2 Dices roll'
         .($score ? ' => '.$d1.' + '.$d2 : '')
-        . '=> '.$sum .$d1+$d2;
+        . '=> '.$sum .$d1+$d2; 
     }
     ?>
     <h1>without score</h1>
