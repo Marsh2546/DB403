@@ -11,6 +11,7 @@
         table {
             border-spacing : 0;
             border: 1px solid black;
+            
         }
         td{
             width: 50px;
