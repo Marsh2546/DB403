@@ -32,7 +32,9 @@
       .form-signin .form-floating:focus-within {
         z-index: 2;
       }
-
+      img{
+        align:center;
+      }
     </style>
     <script>
     function validate(){
@@ -49,7 +51,7 @@
   <body class="d-flex align-items-center py-4 bg-body-tertiary">
     <main class="form-signin w-100 m-auto">
       <form action="signup.php" method="post" onsubmit="validate()">
-        <img class="mb-4" src="img/apple.png" alt="" width="130" height="">
+        <img class="position-static top-20 start-100 bottom-50" class="mb-4" src="img/apple.png" alt="" width="130" height="">
         <!-- <img src="..." class="card-img" alt="...">         -->
         <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
         <div class="form-floating mb-2">
@@ -60,20 +62,20 @@
           <input required name="studentName" type="text" class="form-control" id="student_name" placeholder="">
           <label for="student_name">Student Name</label>
         </div>
-        <div class="form-floating mb-2">
-          <select name="major" class="form-control" id="major">
-        <?php 
-            $sql = 'select * from major order by faculty';
-            $result = $conn->query($sql);
-            while ($row = $result->fetch_assoc()) {
-                echo "<option value ='{$row['majorID']}'>
-                {$row['faculty']}-{$row['majorName']}
-                </option>";
-            }
-            $conn->close();
-        ?>
-        </select>
-          <label for="major">majorID</label>
+          <div class="form-floating mb-2">
+            <select name="major" class="form-control" id="major">
+          <?php 
+              $sql = 'select * from major order by faculty';
+              $result = $conn->query($sql);
+              while ($row = $result->fetch_assoc()) {
+                  echo "<option value ='{$row['majorID']}'>
+                  {$row['faculty']}-{$row['majorName']}
+                  </option>";
+              }
+              $conn->close();
+          ?>
+          </select>
+            <label for="major">majorID</label>
         </div>
         <div class="form-floating mb-2">
           <input required name="password" type="password" class="form-control" id="password" placeholder="">
