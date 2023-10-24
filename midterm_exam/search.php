@@ -24,8 +24,7 @@
             $sql = 'select CategoryID, CategoryName from categories';
             $result = $conn->query($sql);
               while ($row = $result->fetch_assoc()) {
-                echo "<option value ='{$row['CategoryID']}'>
-                {$row['faculty']}{$row['CategoryName']}
+                echo "<option value ='{$row['CategoryID']}'>{$row['CategoryName']}
                 </option>";
                 }
             $conn->close();

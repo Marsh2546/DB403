@@ -5,10 +5,9 @@
         $studentName = $_POST['studentName'];
         $major = $_POST['major'];
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        $sql = "insert into student(studentID,studentName,majorID,password) 
+        $sql = "insert into student(studentID,studentName,majorID,password)
         values('{$studentID}', '{$studentName}', '{$major}', '{$password}')";
         echo $sql;
-        $conn->query($sql);
       }
 ?>
 <!doctype html>
