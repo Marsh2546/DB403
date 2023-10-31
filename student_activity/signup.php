@@ -1,4 +1,5 @@
 <?php
+  session_start();
     require 'connect.php';
       if (isset ($_POST['submit'])){
         $studentID = $_POST['studentID'];
@@ -7,7 +8,18 @@
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $sql = "insert into student(studentID,studentName,majorID,password)
         values('{$studentID}', '{$studentName}', '{$major}', '{$password}')";
-        echo $sql;
+        try{
+          $conn->query($sql);
+          $_SESSION['USER']=['studentID' => $studentID,'studentName' => $studentName];
+          header('location:index.php');
+          exit;
+        }
+        catch(mysqli_sql_exception){
+          $err = "Student ID $studentID already exists";
+        }
+        catch(Exception $e){
+          $err = $e;
+        }
       }
 ?>
 <!doctype html>
@@ -50,10 +62,15 @@
   <body class="d-flex align-items-center py-4 bg-body-tertiary">
     <main class="form-signup w-100 m-auto">
       <form action="signup.php" method="post" onsubmit="validate()">
-<<<<<<< HEAD
-        <img class="position-static top-20 start-100 bottom-50" class="mb-4" src="img/apple.png" alt="" width="130" height="">
+        <img class="rounded mx-auto d-block position-static top-20 start-100 bottom-50" class="mb-4" src="img/apple.png" alt="" width="130" height="">
+      </br>
         <!-- <img src="..." class="card-img" alt="...">         -->
         <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
+      <?php
+        if(isset($err)){
+          echo "<div class='alert alert-danger'>$err</div>";
+        }
+      ?>
         <div class="form-floating mb-2">
           <input required name="studentID" type="text" class="form-control" id="student_id" placeholder="">
           <label for="student_id">Student ID</label>
@@ -77,34 +94,6 @@
           </select>
             <label for="major">majorID</label>
         </div>
-=======
-          <img class="mb-4" src="img/apple.png" alt="" width="130" height="">
-          <!-- <img src="..." class="card-img" alt="...">         -->
-          <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
-              <div class="form-floating mb-2">
-                <input required name="studentID" type="text" class="form-control" id="student_id" placeholder="">
-                <label for="student_id">Student ID</label>
-              </div>
-                  <div class="form-floating mb-1">
-                    <input required name="studentName" type="text" class="form-control" id="student_name" placeholder="">
-                    <label for="student_name">Student Name</label>
-                  </div>
-              
-                  <div class="form-floating mb-2">
-                    <select name="major" class="form-control" id="major">
-                      <?php 
-                        $sql = 'select * from major order by faculty';
-                        $result = $conn->query($sql);
-                        while ($row = $result->fetch_assoc()) {
-                        echo "<option value ='{$row['majorID']}'>
-                        {$row['faculty']}-{$row['majorName']}</option>";
-                        }
-                        $conn->close();
-                      ?>
-                    </select>
-                        <label for="major">majorID</label>
-                  </div>
->>>>>>> bd9c5e029bc8679ec1370179c7e880924d2a35d5
         <div class="form-floating mb-2">
           <input required name="password" type="password" class="form-control" id="password" placeholder="">
           <label for="password">Password</label>
