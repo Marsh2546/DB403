@@ -1,8 +1,8 @@
 <?php
   session_start();
     require 'connect.php';
-      if (isset ($_POST['submit'])){
-        $studentID = $_POST['studentID'];
+      if (!isset ($_POST['submit'])){
+        $studentID = $_POST['student_id'];
         $studentName = $_POST['studentName'];
         $major = $_POST['major'];
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
