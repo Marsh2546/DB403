@@ -2,7 +2,7 @@
   session_start();
   if (isset ($_POST['submit'])){
     require 'connect.php';
-    $studentid = $_POST['student_id'];
+    $studentid = $_POST['studentid'];
     $password = $_POST['password'];
     $sql = "SELECT * FROM student 
     WHERE studentID='{$studentid}'";
@@ -76,14 +76,14 @@
       <br></br>
         <!-- <img class="mb-4" src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
         <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-  <?php
+    <?php
     if(isset($err)){
       echo "<div class='alert alert-danger'>$err</div>";
     }
     else{
 
     }
-  ?>
+    ?>
         <div class="form-floating">
           <input name="student_id" type="text" class="form-control" id="floatingEmail" placeholder="Email address">
           <label for="floatingEmail">Student ID</label>
