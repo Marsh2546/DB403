@@ -1,0 +1,29 @@
+$username = $_POST['username'];
+$password = $_POST['password'];
+
+$sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
+
+$result = mysqli_query($conn, $sql);
+
+if (mysqli_num_rows($result) > 0) {
+  // ผู้ใช้มีสิทธิ์เข้าสู่ระบบ
+  $row = mysqli_fetch_assoc($result);
+  $user_type = $row['user_type'];
+
+  if ($user_type == 'user') {
+    // ผู้ใช้เป็นผู้ใช้ปกติ
+    header('Location: /user/index.php');
+  } else if ($user_type == 'admin') {
+    // ผู้ใช้เป็นผู้ดูแลระบบ
+    header('Location: /admin/index.php');
+}
+} else {
+  // ผู้ใช้ไม่มีสิทธิ์เข้าสู่ระบบ
+  echo 'Invalid username or password';
+}
+
+SELECT staff.staffID, staff.staffName
+FROM staff
+UNION
+SELECT student.studentID, student.studentName
+FROM student;
